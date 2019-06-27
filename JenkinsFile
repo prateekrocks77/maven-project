@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    stages {
+        stage('clone and clean repo') {
+            steps {
+                sh  "git clone https://github.com/prateekrocks77/maven-project"
+                sh "mvn clean -f maven-project"
+            }
+        }
+                stage('Test') { 
+            steps {
+                sh "mvn test -f maven-project" 
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                sh "mvn package -f maven-project" 
+            }
+        }
+
+    }
+    }
